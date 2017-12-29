@@ -3,7 +3,6 @@ require 'murker/spy'
 
 module Murker
   def self.capture(&block)
-    spy = Spy.new(&block)
-    spy.call
+    Spy.on(&block)
   end
 end
