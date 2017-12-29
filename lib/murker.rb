@@ -1,5 +1,9 @@
-require "murker/version"
+require 'murker/version'
+require 'murker/spy'
 
 module Murker
-  # Your code goes here...
+  def self.capture(&block)
+    spy = Spy.new(&block)
+    spy.call
+  end
 end
