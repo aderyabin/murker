@@ -1,6 +1,7 @@
 require 'murker/interaction'
 require 'murker/generator'
 require 'murker/repo'
+require 'murker/validator'
 
 module Murker
   class Spy
@@ -36,7 +37,11 @@ module Murker
           schema = Generator.call(interaction: interaction)
           puts "#{schema}\n\n"
           repo = Repo.new
-          unless repo.has_schema_for?(interaction)
+          if repo.has_schema_for?(interaction)
+            schema = repo.retreive_schema_for(interaction)
+            res = Validator.call(interaction: interaction, schema: schema)
+            raise RuntimeError, 'VALIDATION FAILED' unless res
+          else
             repo.store_schema_for(interaction)
           end
         end
