@@ -2,10 +2,11 @@ require 'murker/interaction'
 
 module Murker
   class Spy
-    attr_reader :interaction
+    attr_reader :interactions
 
     def initialize(&block)
       @block = block
+      @interactions = []
     end
 
     def self.on(&block)
@@ -28,11 +29,13 @@ module Murker
 
     def call
       @block.call.tap do |result|
+        puts "Got #{interactions.count} interactions"
+        interactions.each { |interaction| puts "#{pp interaction}\n\n" }
       end
     end
 
-    def fill_interaction_by_action_dispatch(request, response)
-      @interaction = Interaction.from_action_dispatch(request, response)
+    def add_interaction_by_action_dispatch(request, response)
+      @interactions << Interaction.from_action_dispatch(request, response)
     end
   end
 end

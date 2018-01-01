@@ -12,7 +12,7 @@ module Murker
             super.tap do
               if Murker::Spy.enabled?
                 Murker::Spy.current
-                  .fill_interaction_by_action_dispatch(@request, @response)
+                  .add_interaction_by_action_dispatch(@request, @response)
               end
             end
           end
