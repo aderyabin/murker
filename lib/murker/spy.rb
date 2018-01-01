@@ -1,5 +1,6 @@
 require 'murker/interaction'
 require 'murker/generator'
+require 'murker/repo'
 
 module Murker
   class Spy
@@ -32,7 +33,12 @@ module Murker
       @block.call.tap do |result|
         puts "Got #{interactions.count} interactions"
         interactions.each do |interaction|
-          puts "#{Generator.call(interaction: interaction)}\n\n"
+          schema = Generator.call(interaction: interaction)
+          puts "#{schema}\n\n"
+          repo = Repo.new
+          unless repo.has_schema_for?(interaction)
+            repo.store_schema_for(interaction)
+          end
         end
       end
     end
