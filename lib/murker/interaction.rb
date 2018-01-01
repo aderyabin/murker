@@ -15,27 +15,38 @@ module Murker
       :body
     )
 
-    def initialize(request, response)
-      @verb = request.method
-      @endpoint_path = route_name(request)
-      @path_info = request.path_info
-      @path_params = request.env["#{PREFIX}.path_parameters"].stringify_keys.except('format')
-      @query_params = request.env["#{PREFIX}.query_parameters"]
-      @payload = request.env["#{PREFIX}.request_parameters"].merge(
-        request.env["#{PREFIX}.query_parameters"]
-      ).stringify_keys.except('action', 'controller', 'format', '_method')
+    def initialize(**params)
+      @verb = params[:verb]
+      @endpoint_path = params[:endpoint_path]
+      @path_info = params[:path_info]
+      @path_params = params[:path_params]
+      @query_params = params[:query_params]
+      @payload = params[:payload]
 
-      @status = response.status
-      @body = JSON.parse(response.body)
+      @status = params[:status]
+      @body = params[:body]
     end
 
     def self.from_action_dispatch(request, response)
-      new(request, response)
+      params = {
+        verb: request.method,
+        endpoint_path: route_name(request),
+        path_info: request.path_info,
+        path_params: request.env["#{PREFIX}.path_parameters"].stringify_keys.except('format'),
+        query_params: request.env["#{PREFIX}.query_parameters"],
+        payload: request.env["#{PREFIX}.request_parameters"].merge(
+          request.env["#{PREFIX}.query_parameters"]
+        ).stringify_keys.except('action', 'controller', 'format', '_method'),
+        status: response.status,
+        body: JSON.parse(response.body)
+      }
+
+      new(params)
     end
 
     private
 
-    def route_name(request)
+    def self.route_name(request)
       return unless defined? Rails
 
       Rails.application.routes.router.recognize(request) do |route, _|
