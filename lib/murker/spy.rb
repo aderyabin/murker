@@ -1,4 +1,5 @@
 require 'murker/interaction'
+require 'murker/generator'
 
 module Murker
   class Spy
@@ -30,7 +31,9 @@ module Murker
     def call
       @block.call.tap do |result|
         puts "Got #{interactions.count} interactions"
-        interactions.each { |interaction| puts "#{pp interaction}\n\n" }
+        interactions.each do |interaction|
+          puts "#{Generator.call(interaction: interaction)}\n\n"
+        end
       end
     end
 
