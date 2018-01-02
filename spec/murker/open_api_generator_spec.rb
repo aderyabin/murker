@@ -46,11 +46,41 @@ RSpec.describe Murker::OpenApiGenerator do
       it { expect(generator.call).to eq expected }
     end
 
-    # context 'when interaction is GET v1/martians/:id' do
-    #   let(:params) { { verb: 'GET', endpoint_path: 'v1/martians/:id' } }
-    #   expected = 'spec/murker/v1/martians/__id/GET.txt'
+    context 'when interaction is GET /martians/1.json' do
+      let(:params) {
+        {
+          verb: 'GET',
+          endpoint_path: '/martians/:id',
+          status: 200,
+          body: {"name"=>"spajic", "age"=>30, "ololo"=>"OLOLO"}
+        }
+      }
+      expected = <<~HEREDOC
+        ---
+        openapi: 3.0.0
+        paths:
+          "/martians/{id}":
+            get:
+              responses:
+                "'200'":
+                  content:
+                    application/json:
+                      schema:
+                        type: object
+                        required:
+                        - name
+                        - age
+                        - ololo
+                        properties:
+                          name:
+                            type: string
+                          age:
+                            type: integer
+                          ololo:
+                            type: string
+      HEREDOC
 
-    #   it { expect(repo.path_for(interaction)).to eq expected }
-    # end
+      it { expect(generator.call).to eq expected }
+    end
   end
 end

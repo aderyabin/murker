@@ -22,7 +22,7 @@ module Murker
       schema = {
         'openapi' => OPEN_API_VERSION,
         'paths' => {
-          interaction.endpoint_path => {
+          handle_path_params(interaction.endpoint_path) => {
             interaction.verb.downcase => response_schema
           }
         }
@@ -31,6 +31,10 @@ module Murker
     end
 
     private
+
+    def handle_path_params(path)
+      path.gsub(/:(\w*)/) { |_s| "{#{$1}}" }
+    end
 
     def response_schema
       {
