@@ -22,8 +22,35 @@ Feature: validate interaction and fails given schema already exists and does not
       end
       """
     Given a file named "spec/murker/martians/GET.txt" with:
-      """txt
-      GET, /martians, /martians.json, {"controller"=>"martians", "action"=>"index"}, {}, {}, 200, {"name"=>"spajic", "age"=>30, "OOOPS"=>"THIS GONNA CAUSE A VALIDATION ERROR"}
+      """yml
+      ---
+      openapi: 3.0.0
+      paths:
+        "/martians":
+          get:
+            responses:
+              "'200'":
+                content:
+                  application/json:
+                    schema:
+                      type: array
+                      minItems: 1
+                      uniqueItems: true
+                      items:
+                        type: object
+                        required:
+                        - name
+                        - age
+                        - ololo
+                        - thisIsGonnaFail
+                        properties:
+                          name:
+                            type: string
+                          age:
+                            type: integer
+                          ololo:
+                            type: string
+
       """
 
   When I run `bin/rspec spec/controllers/martians_controller_spec.rb`

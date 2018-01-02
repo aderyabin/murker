@@ -6,8 +6,8 @@ module Murker
   class Repo
     SCHEMAS_PATH = 'spec/murker'.freeze
 
-    def store_schema_for(interaction)
-      schema = Generator.call(interaction: interaction)
+    def store_schema_for(interaction, generator_class: Generator)
+      schema = generator_class.call(interaction: interaction)
       path = path_for(interaction)
       store(schema, path)
     end

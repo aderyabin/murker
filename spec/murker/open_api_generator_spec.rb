@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Murker::OpenApiGenerator do
   describe '#call' do
-    let(:generator) { described_class.new(interaction) }
+    let(:generator) { described_class.new(interaction: interaction) }
     let(:interaction) { Murker::Interaction.new(params) }
 
     context 'when interaction is GET /martians.json' do

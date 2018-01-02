@@ -10,7 +10,7 @@ module Murker
 
     attr_reader :interaction
 
-    def initialize(interaction)
+    def initialize(interaction:)
       @interaction = interaction
     end
 

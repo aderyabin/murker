@@ -29,13 +29,61 @@ Feature: generate two schemas from one test with two interactions
   Then a file named "spec/murker/martians/GET.txt" should exist
 
   Then the file "spec/murker/martians/GET.txt" should contain exactly:
-  """txt
-  GET, /martians, /martians.json, {"controller"=>"martians", "action"=>"index"}, {}, {}, 200, {"name"=>"spajic", "age"=>30, "ololo"=>"OLOLO"}
+  """yml
+  ---
+  openapi: 3.0.0
+  paths:
+    "/martians":
+      get:
+        responses:
+          "'200'":
+            content:
+              application/json:
+                schema:
+                  type: array
+                  minItems: 1
+                  uniqueItems: true
+                  items:
+                    type: object
+                    required:
+                    - name
+                    - age
+                    - ololo
+                    properties:
+                      name:
+                        type: string
+                      age:
+                        type: integer
+                      ololo:
+                        type: string
+
   """
 
   Then a file named "spec/murker/martians/__id/GET.txt" should exist
 
   Then the file "spec/murker/martians/__id/GET.txt" should contain exactly:
   """txt
-  GET, /martians/:id, /martians/1.json, {"controller"=>"martians", "action"=>"show", "id"=>"1"}, {}, {}, 200, {"name"=>"spajic", "age"=>30, "ololo"=>"OLOLO"}
+  ---
+  openapi: 3.0.0
+  paths:
+    "/martians/{id}":
+      get:
+        responses:
+          "'200'":
+            content:
+              application/json:
+                schema:
+                  type: object
+                  required:
+                  - name
+                  - age
+                  - ololo
+                  properties:
+                    name:
+                      type: string
+                    age:
+                      type: integer
+                    ololo:
+                      type: string
+
   """
