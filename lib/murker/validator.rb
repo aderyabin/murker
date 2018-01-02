@@ -6,7 +6,7 @@ module Murker
     def self.call(interaction:, schema:, generator_class: Generator)
       interaction_schema = generator_class.call(interaction: interaction)
 
-      interaction_schema == schema
+      YAML.load(interaction_schema) == YAML.load(schema)
     end
   end
 end
