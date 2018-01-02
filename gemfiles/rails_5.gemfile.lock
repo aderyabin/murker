@@ -2,6 +2,7 @@ PATH
   remote: ..
   specs:
     murker (0.1.0)
+      json-diff
       json-schema-generator
 
 GEM
@@ -102,6 +103,7 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
+    json-diff (0.4.1)
     json-schema-generator (0.0.9)
       jsonpath
     jsonapi (0.1.1.beta6)
