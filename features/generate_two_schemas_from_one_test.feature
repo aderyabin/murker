@@ -1,6 +1,6 @@
-Feature: generate schema for test with murker capture block
+Feature: generate two schemas from one test with two interactions
 
-  When you write rspec test with Murker.capture block it generates schema for network interaction
+  When you write rspec test with :murker tag it generates schema for all interactions
 
   Scenario: basic usage
     Given a file named "spec/controllers/martians_controller_spec.rb" with:
@@ -10,13 +10,12 @@ Feature: generate schema for test with murker capture block
 
       RSpec.describe MartiansController, type: :request do
 
-        describe "GET #index" do
-          it "returns a success response" do
-            martian = Martian.create! name: 'spajic', age: 30
+        describe "GET #index and martian" do
+          it "returns a success response", :murker do
+            martian = Martian.create! name: 'spajic', age: 30, id: 1
 
-            Murker.capture do
-              get '/martians.json'
-            end
+            get '/martians.json'
+            get '/martians/1.json'
 
             expect(response).to be_success
           end
@@ -32,4 +31,11 @@ Feature: generate schema for test with murker capture block
   Then the file "spec/murker/martians/GET.txt" should contain exactly:
   """txt
   GET, /martians, /martians.json, {"controller"=>"martians", "action"=>"index"}, {}, {}, 200, {"name"=>"spajic", "age"=>30, "ololo"=>"OLOLO"}
+  """
+
+  Then a file named "spec/murker/martians/__id/GET.txt" should exist
+
+  Then the file "spec/murker/martians/__id/GET.txt" should contain exactly:
+  """txt
+  GET, /martians/:id, /martians/1.json, {"controller"=>"martians", "action"=>"show", "id"=>"1"}, {}, {}, 200, {"name"=>"spajic", "age"=>30, "ololo"=>"OLOLO"}
   """

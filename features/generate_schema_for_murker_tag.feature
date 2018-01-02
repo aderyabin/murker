@@ -8,14 +8,13 @@ Feature: generate schema for test with :murker tag
       require 'rails_helper'
       require 'murker/spec_helper'
 
-      RSpec.describe MartiansController, type: :controller do
-        render_views
+      RSpec.describe MartiansController, type: :request do
 
         describe "GET #index" do
           it "returns a success response", :murker do
             martian = Martian.create! name: 'spajic', age: 30
 
-            get :index, format: :json
+            get '/martians.json'
             expect(response).to be_success
           end
         end

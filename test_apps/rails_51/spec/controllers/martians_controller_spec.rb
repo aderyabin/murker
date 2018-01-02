@@ -1,14 +1,15 @@
 require 'rails_helper'
 require 'murker/spec_helper'
 
-RSpec.describe MartiansController, type: :controller do
-  render_views
+RSpec.describe MartiansController, type: :request do
 
-  describe "GET #index" do
+  describe "GET #index and martian" do
     it "returns a success response", :murker do
-      martian = Martian.create! name: 'spajic', age: 30
+      martian = Martian.create! name: 'spajic', age: 30, id: 1
 
-      get :index, format: :json
+      get '/martians.json'
+      get '/martians/1.json'
+
       expect(response).to be_success
     end
   end

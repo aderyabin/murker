@@ -40,7 +40,9 @@ module Murker
           if repo.has_schema_for?(interaction)
             schema = repo.retreive_schema_for(interaction)
             res = Validator.call(interaction: interaction, schema: schema)
-            raise RuntimeError, 'VALIDATION FAILED' unless res
+            unless res
+              raise RuntimeError, 'VALIDATION FAILED'
+            end
           else
             repo.store_schema_for(interaction)
           end

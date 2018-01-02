@@ -1,0 +1,1 @@
+GET, /martians/:id, /martians/1.json, {"controller"=>"martians", "action"=>"show", "id"=>"1"}, {}, {}, 200, {"name"=>"spajic", "age"=>30, "ololo"=>"OLOLO"}
