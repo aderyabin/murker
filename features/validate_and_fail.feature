@@ -50,7 +50,6 @@ Feature: validate interaction and fails given schema already exists and does not
                             type: integer
                           ololo:
                             type: string
-
       """
 
   When I run `bin/rspec spec/controllers/martians_controller_spec.rb`

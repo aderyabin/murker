@@ -26,7 +26,7 @@ Feature: generate schema for test with :murker tag
 
   Then a file named "spec/murker/martians/GET.txt" should exist
 
-  Then the file "spec/murker/martians/GET.txt" should contain exactly:
+  Then the file "spec/murker/martians/GET.txt" should contain:
   """yml
   ---
   openapi: 3.0.0
@@ -54,5 +54,4 @@ Feature: generate schema for test with :murker tag
                         type: integer
                       ololo:
                         type: string
-
   """

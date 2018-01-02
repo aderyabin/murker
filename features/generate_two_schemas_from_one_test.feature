@@ -28,7 +28,7 @@ Feature: generate two schemas from one test with two interactions
 
   Then a file named "spec/murker/martians/GET.txt" should exist
 
-  Then the file "spec/murker/martians/GET.txt" should contain exactly:
+  Then the file "spec/murker/martians/GET.txt" should contain:
   """yml
   ---
   openapi: 3.0.0
@@ -56,13 +56,12 @@ Feature: generate two schemas from one test with two interactions
                         type: integer
                       ololo:
                         type: string
-
   """
 
   Then a file named "spec/murker/martians/__id/GET.txt" should exist
 
-  Then the file "spec/murker/martians/__id/GET.txt" should contain exactly:
-  """txt
+  Then the file "spec/murker/martians/__id/GET.txt" should contain:
+  """yml
   ---
   openapi: 3.0.0
   paths:
@@ -85,5 +84,4 @@ Feature: generate two schemas from one test with two interactions
                       type: integer
                     ololo:
                       type: string
-
   """
