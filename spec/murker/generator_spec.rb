@@ -55,6 +55,7 @@ RSpec.describe Murker::Generator do
         {
           verb: 'GET',
           endpoint_path: '/martians/:id',
+          path_params: {"controller"=>"v1/martians", "action"=>"show", "id"=>"1"},
           status: 200,
           body: {"name"=>"spajic", "age"=>30, "ololo"=>"OLOLO"}
         }
@@ -65,6 +66,16 @@ RSpec.describe Murker::Generator do
         "paths" => {
           "/martians/{id}" => {
             "get" => {
+              "parameters"=> [
+                {
+                  "in" => "path",
+                  "name" => "id",
+                  "description" => "id",
+                  "schema" => { "type" => "integer" },
+                  "required" => true,
+                  "example" => "1"
+                }
+              ],
               "responses" => {
                 "'200'" => {
                   "description" => "GET /martians/:id -> 200",
