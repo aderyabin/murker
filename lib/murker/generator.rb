@@ -2,6 +2,7 @@ require 'json-schema-generator'
 
 module Murker
   # Generates OpenAPI v3 schema for Interaction
+  # Output is Ruby object representing schema, it may be serialized to yml|json
   class Generator
     OPEN_API_VERSION = '3.0.0'.freeze
     JSON_SCHEMA_VERSION = 'draft4'.freeze
@@ -19,7 +20,7 @@ module Murker
     end
 
     def call
-      schema = {
+      {
         'openapi' => OPEN_API_VERSION,
         'paths' => {
           handle_path_params(interaction.endpoint_path) => {
@@ -27,7 +28,6 @@ module Murker
           }
         }
       }
-      YAML.dump(schema)
     end
 
     private

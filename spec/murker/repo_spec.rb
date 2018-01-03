@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Murker::Repo do
   describe '#path_for' do
-    let(:repo) { described_class.new }
+    let(:repo) { described_class }
     let(:interaction) { Murker::Interaction.new(params) }
 
     context 'when interaction is GET v1/martians/:id' do
