@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.0
 paths:
-  "/martians":
+  "/v1/martians":
     get:
       responses:
         "'200'":
@@ -17,7 +17,6 @@ paths:
                   - name
                   - age
                   - ololo
-                  - thisIsGonnaFail
                   properties:
                     name:
                       type: string

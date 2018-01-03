@@ -3,19 +3,19 @@ Feature: generate two schemas from one test with two interactions
   When you write rspec test with :murker tag it generates schema for all interactions
 
   Scenario: basic usage
-    Given a file named "spec/controllers/martians_controller_spec.rb" with:
+    Given a file named "spec/requests/martians_spec.rb" with:
       """ruby
       require 'rails_helper'
       require 'murker/spec_helper'
 
-      RSpec.describe MartiansController, type: :request do
+      RSpec.describe V1::MartiansController, type: :request do
 
         describe "GET #index and martian" do
           it "returns a success response", :murker do
             martian = Martian.create! name: 'spajic', age: 30, id: 1
 
-            get '/martians.json'
-            get '/martians/1.json'
+            get '/v1/martians.json'
+            get '/v1/martians/1.json'
 
             expect(response).to be_success
           end
@@ -23,17 +23,17 @@ Feature: generate two schemas from one test with two interactions
       end
       """
 
-  When I run `bin/rspec spec/controllers/martians_controller_spec.rb`
+  When I run `bin/rspec spec/requests/martians_spec.rb`
   Then the example should pass
 
-  Then a file named "spec/murker/martians/GET.yml" should exist
+  Then a file named "spec/murker/v1/martians/GET.yml" should exist
 
-  Then the file "spec/murker/martians/GET.yml" should contain:
+  Then the file "spec/murker/v1/martians/GET.yml" should contain:
   """yml
   ---
   openapi: 3.0.0
   paths:
-    "/martians":
+    "/v1/martians":
       get:
         responses:
           "'200'":
@@ -58,14 +58,14 @@ Feature: generate two schemas from one test with two interactions
                         type: string
   """
 
-  Then a file named "spec/murker/martians/__id/GET.yml" should exist
+  Then a file named "spec/murker/v1/martians/__id/GET.yml" should exist
 
-  Then the file "spec/murker/martians/__id/GET.yml" should contain:
+  Then the file "spec/murker/v1/martians/__id/GET.yml" should contain:
   """yml
   ---
   openapi: 3.0.0
   paths:
-    "/martians/{id}":
+    "/v1/martians/{id}":
       get:
         responses:
           "'200'":

@@ -3,19 +3,19 @@ Feature: generate schema for test with murker capture block
   When you write rspec test with Murker.capture block it generates schema for network interaction
 
   Scenario: basic usage
-    Given a file named "spec/controllers/martians_controller_spec.rb" with:
+    Given a file named "spec/requests/martians_spec.rb" with:
       """ruby
       require 'rails_helper'
       require 'murker/spec_helper'
 
-      RSpec.describe MartiansController, type: :request do
+      RSpec.describe V1::MartiansController, type: :request do
 
         describe "GET #index" do
           it "returns a success response" do
             martian = Martian.create! name: 'spajic', age: 30
 
             Murker.capture do
-              get '/martians.json'
+              get '/v1/martians.json'
             end
 
             expect(response).to be_success
@@ -24,17 +24,17 @@ Feature: generate schema for test with murker capture block
       end
       """
 
-  When I run `bin/rspec spec/controllers/martians_controller_spec.rb`
+  When I run `bin/rspec spec/requests/martians_spec.rb`
   Then the example should pass
 
-  Then a file named "spec/murker/martians/GET.yml" should exist
+  Then a file named "spec/murker/v1/martians/GET.yml" should exist
 
-  Then the file "spec/murker/martians/GET.yml" should contain:
+  Then the file "spec/murker/v1/martians/GET.yml" should contain:
   """yml
   ---
   openapi: 3.0.0
   paths:
-    "/martians":
+    "/v1/martians":
       get:
         responses:
           "'200'":
