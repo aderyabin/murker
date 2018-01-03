@@ -6,7 +6,8 @@ require 'murker/validator'
 require 'murker/repo'
 
 module Murker
-  class ValidationError < RuntimeError; end
+  class MurkerError < StandardError; end
+  class ValidationError < MurkerError; end
 
   def self.capture(&block)
     Spy.on(&block)
