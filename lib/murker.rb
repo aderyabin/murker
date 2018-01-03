@@ -6,22 +6,26 @@ require 'murker/validator'
 require 'murker/repo'
 
 module Murker
+  class ValidationError < RuntimeError; end
+
   def self.capture(&block)
     Spy.on(&block)
   end
 
   def self.handle_captured_interactions(interactions)
-    interactions.each do |interaction|
-      if Repo.has_schema_for?(interaction)
-        stored_schema = Repo.retreive_schema_for(interaction)
-        new_schema = Generator.call(interaction: interaction)
-        res = Validator.call(new_schema: new_schema, stored_schema: stored_schema)
-        unless res
-          raise RuntimeError, 'VALIDATION FAILED'
+    validation_errors =
+      interactions.each_with_object([]) do |interaction, errors|
+        if Repo.has_schema_for?(interaction)
+          stored_schema = Repo.retreive_schema_for(interaction)
+          new_schema = Generator.call(interaction: interaction)
+          errors << Validator.call(new_schema: new_schema, stored_schema: stored_schema)
+        else
+          Repo.store_schema_for(interaction)
         end
-      else
-        Repo.store_schema_for(interaction)
-      end
-    end
+      end.compact
+    return if validation_errors.empty?
+
+    error_message = validation_errors.join("\n")
+    raise ValidationError, error_message
   end
 end

@@ -3,7 +3,9 @@ module Murker
   # Schemas are ruby objects representing OpenApi3 schema
   class Validator
     def self.call(new_schema:, stored_schema:)
-      new_schema == stored_schema
+      return if new_schema == stored_schema
+
+      'VALIDATION FAILED'
     end
   end
 end
