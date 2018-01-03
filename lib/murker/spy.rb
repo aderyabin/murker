@@ -1,6 +1,5 @@
 require 'murker/interaction'
 require 'murker/generator'
-require 'murker/open_api_generator'
 require 'murker/repo'
 require 'murker/validator'
 
@@ -32,22 +31,20 @@ module Murker
     end
 
     def call
-      generator_class = OpenApiGenerator
-
       @block.call.tap do |result|
         puts "Got #{interactions.count} interactions"
         interactions.each do |interaction|
-          schema = generator_class.call(interaction: interaction)
+          schema = Generator.call(interaction: interaction)
           puts "#{schema}\n\n"
           repo = Repo.new
           if repo.has_schema_for?(interaction)
             schema = repo.retreive_schema_for(interaction)
-            res = Validator.call(interaction: interaction, schema: schema, generator_class: generator_class)
+            res = Validator.call(interaction: interaction, schema: schema)
             unless res
               raise RuntimeError, 'VALIDATION FAILED'
             end
           else
-            repo.store_schema_for(interaction, generator_class: generator_class)
+            repo.store_schema_for(interaction)
           end
         end
       end

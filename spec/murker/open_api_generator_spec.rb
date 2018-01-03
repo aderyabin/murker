@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Murker::OpenApiGenerator do
+RSpec.describe Murker::Generator do
   describe '#call' do
     let(:generator) { described_class.new(interaction: interaction) }
     let(:interaction) { Murker::Interaction.new(params) }
