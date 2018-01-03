@@ -1,7 +1,4 @@
 require 'murker/interaction'
-require 'murker/generator'
-require 'murker/repo'
-require 'murker/validator'
 
 module Murker
   class Spy
@@ -13,7 +10,7 @@ module Murker
     end
 
     def self.on(&block)
-      require 'lurker/spec_helper' unless defined? Murker::SpecHelper
+      require 'murker/spec_helper' unless defined? Murker::SpecHelper
 
       spy = new(&block)
       Thread.current[:murker_spy] = spy
@@ -31,22 +28,8 @@ module Murker
     end
 
     def call
-      @block.call.tap do |result|
-        puts "Got #{interactions.count} interactions"
-        interactions.each do |interaction|
-          schema = Generator.call(interaction: interaction)
-          puts "#{schema}\n\n"
-          repo = Repo.new
-          if repo.has_schema_for?(interaction)
-            schema = repo.retreive_schema_for(interaction)
-            res = Validator.call(interaction: interaction, schema: schema)
-            unless res
-              raise RuntimeError, 'VALIDATION FAILED'
-            end
-          else
-            repo.store_schema_for(interaction)
-          end
-        end
+      @block.call.tap do |_result|
+        Murker.handle_captured_interactions(interactions)
       end
     end
 
