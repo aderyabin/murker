@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @pet.name %>
+</p>
+
+<p>
+  <b>Weight:</b>
+  <%= @pet.weight %>
+</p>
+
+
+<%= link_to 'Edit', edit_martian_pet_path(@pet.martian, @pet) %> |
+<%= link_to 'Back', martian_pets_path(@pet.martian) %>
