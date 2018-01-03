@@ -19,14 +19,26 @@ module Murker
         if Repo.has_schema_for?(interaction)
           stored_schema = Repo.retreive_schema_for(interaction)
           new_schema = Generator.call(interaction: interaction)
-          errors << Validator.call(new_schema: new_schema, stored_schema: stored_schema)
+          validation_error =
+            Validator.call(new_schema: new_schema, stored_schema: stored_schema)
+          errors << [interaction, validation_error] if validation_error
         else
           Repo.store_schema_for(interaction)
         end
-      end.compact
+      end
     return if validation_errors.empty?
 
-    error_message = validation_errors.join("\n")
-    raise ValidationError, error_message
+    raise ValidationError, build_error_message(validation_errors)
+  end
+
+  def self.build_error_message(validation_errors)
+    error_message = "MURKER VALIDATION FAILED!\n\n"
+    validation_errors.each do |interaction, error|
+      interaction_name = "#{interaction.verb} #{interaction.endpoint_path}"
+      error_message <<
+        "Interaction '#{interaction_name}' failed with the following reason:\n" <<
+        "#{error}\n\n"
+    end
+    error_message
   end
 end

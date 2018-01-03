@@ -15,6 +15,7 @@ Feature: validate interaction and fails given schema already exists and does not
             martian = Martian.create! name: 'spajic', age: 30, id: 1
 
             get '/martians.json'
+            get '/martians/1.json'
 
             expect(response).to be_success
           end
@@ -52,6 +53,43 @@ Feature: validate interaction and fails given schema already exists and does not
                             type: string
       """
 
+    Given a file named "spec/murker/martians/__id/GET.yml" with:
+      """yml
+      ---
+      openapi: 3.0.0
+      paths:
+        "/martians/{id}":
+          get:
+            responses:
+              "'200'":
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      required:
+                      - name
+                      - age
+                      - ololo
+                      - thisIsGonnaFailToo
+                      properties:
+                        name:
+                          type: string
+                        age:
+                          type: integer
+                        ololo:
+                          type: string
+      """
+
   When I run `bin/rspec spec/controllers/martians_controller_spec.rb`
   Then the example should fail
-  Then the output should contain "VALIDATION FAILED"
+  Then the output should contain failures:
+    """
+    Murker::ValidationError:
+      MURKER VALIDATION FAILED!
+
+      Interaction 'GET /martians' failed with the following reason:
+      [{"op"=>"remove", "path"=>"/paths/~1martians/get/responses/'200'/content/application~1json/schema/items/required/3", "was"=>"thisIsGonnaFail"}]
+
+      Interaction 'GET /martians/:id' failed with the following reason:
+      [{"op"=>"remove", "path"=>"/paths/~1martians~1{id}/get/responses/'200'/content/application~1json/schema/required/3", "was"=>"thisIsGonnaFailToo"}]
+    """

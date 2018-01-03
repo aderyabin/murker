@@ -13,6 +13,7 @@ paths:
                 - name
                 - age
                 - ololo
+                - thisIsGonnaFailToo
                 properties:
                   name:
                     type: string

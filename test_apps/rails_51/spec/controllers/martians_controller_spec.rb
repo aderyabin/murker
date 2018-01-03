@@ -8,6 +8,7 @@ RSpec.describe MartiansController, type: :request do
       martian = Martian.create! name: 'spajic', age: 30, id: 1
 
       get '/martians.json'
+      get '/martians/1.json'
 
       expect(response).to be_success
     end

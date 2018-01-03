@@ -17,6 +17,7 @@ paths:
                   - name
                   - age
                   - ololo
+                  - thisIsGonnaFail
                   properties:
                     name:
                       type: string
