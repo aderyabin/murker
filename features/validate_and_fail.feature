@@ -21,7 +21,7 @@ Feature: validate interaction and fails given schema already exists and does not
         end
       end
       """
-    Given a file named "spec/murker/martians/GET.txt" with:
+    Given a file named "spec/murker/martians/GET.yml" with:
       """yml
       ---
       openapi: 3.0.0

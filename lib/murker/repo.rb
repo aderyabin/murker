@@ -22,11 +22,11 @@ module Murker
     end
 
     def self.path_for(interaction)
-      path = interaction.endpoint_path
+      endpoint_path = interaction.endpoint_path
       verb = interaction.verb.to_s.upcase
-      name = File.join(SCHEMAS_PATH, path, verb.to_s.upcase)
+      name = File.join(SCHEMAS_PATH, endpoint_path, verb)
       name.gsub!(/:/, '__')
-      "#{name}.txt"
+      "#{name}.yml"
     end
 
     def self.store(schema, path)

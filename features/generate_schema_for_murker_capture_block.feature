@@ -27,9 +27,9 @@ Feature: generate schema for test with murker capture block
   When I run `bin/rspec spec/controllers/martians_controller_spec.rb`
   Then the example should pass
 
-  Then a file named "spec/murker/martians/GET.txt" should exist
+  Then a file named "spec/murker/martians/GET.yml" should exist
 
-  Then the file "spec/murker/martians/GET.txt" should contain:
+  Then the file "spec/murker/martians/GET.yml" should contain:
   """yml
   ---
   openapi: 3.0.0
