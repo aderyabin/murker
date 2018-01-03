@@ -1,0 +1,19 @@
+---
+openapi: 3.0.0
+paths:
+  "/v1/martians/{martian_id}/pets/{id}":
+    get:
+      responses:
+        "'200'":
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - name
+                - weight
+                properties:
+                  name:
+                    type: string
+                  weight:
+                    type: integer

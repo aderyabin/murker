@@ -6,10 +6,18 @@ module V1
     # GET martians/1/pets
     def index
       @pets = @martian.pets
+      respond_to do |format|
+        format.html {}
+        format.json { render json: @pets, each_serializer: PetSerializer }
+      end
     end
 
     # GET martians/1/pets/1
     def show
+      respond_to do |format|
+        format.html {}
+        format.json { render json: @pet }
+      end
     end
 
     # GET martians/1/pets/new
