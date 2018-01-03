@@ -16,7 +16,7 @@ module V1
     # GET /martians/1.json
     def show
       respond_to do |format|
-        format.html {}
+        format.html { render plain: '' }
         format.json { render json: @martian }
       end
     end

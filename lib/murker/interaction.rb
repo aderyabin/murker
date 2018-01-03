@@ -1,3 +1,5 @@
+require 'murker'
+
 module Murker
   class Interaction
     class NonroutableRequest < RuntimeError; end
@@ -28,6 +30,13 @@ module Murker
     end
 
     def self.from_action_dispatch(request, response)
+      json_body = JSON.parse(response.body) rescue nil
+      unless json_body
+        error_message = "Murker requires response.body to be parsable JSON, " <<
+          "but got '#{response.body}'"
+        raise MurkerError, error_message
+      end
+
       params = {
         verb: request.method,
         endpoint_path: route_name(request),
@@ -38,7 +47,7 @@ module Murker
           request.env["#{PREFIX}.query_parameters"]
         ).stringify_keys.except('action', 'controller', 'format', '_method'),
         status: response.status,
-        body: JSON.parse(response.body)
+        body: json_body
       }
 
       new(params)
