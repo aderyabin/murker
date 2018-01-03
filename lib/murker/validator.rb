@@ -1,12 +1,9 @@
-require 'murker/generator'
-
 module Murker
-  # Validates an interaction against a schema
+  # Validates new_schema vs stored_schema and returns validation error
+  # Schemas are ruby objects representing OpenApi3 schema
   class Validator
-    def self.call(interaction:, schema:)
-      interaction_schema = Generator.call(interaction: interaction)
-
-      YAML.load(interaction_schema) == YAML.load(schema)
+    def self.call(new_schema:, stored_schema:)
+      new_schema == stored_schema
     end
   end
 end
