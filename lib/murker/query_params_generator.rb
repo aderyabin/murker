@@ -1,5 +1,5 @@
 require 'murker/utils'
-
+require 'pry'
 module Murker
   # Generates OpenAPI v3 schema for query_params of Interaction
   class QueryParamsGenerator
@@ -26,8 +26,8 @@ module Murker
     def schema_for_path_param(name, value)
       {
         'in' => 'query',
-        'name' => name,
-        'description' => name,
+        'name' => name.to_s,
+        'description' => name.to_s,
         'schema' => schema_by_query_param_value(value),
         'required' => true,
       }
@@ -35,11 +35,11 @@ module Murker
 
     # Value may be Array, Hash, or String
     def schema_by_query_param_value(value)
-      case value.class
+      case value
       when Array
-        { 'type' => schema_by_object(value) }
+        schema_by_object(value)
       when Hash
-        { 'type' => schema_by_object(value) }
+        schema_by_object(value)
       else
         { 'type' => 'string' }
       end
