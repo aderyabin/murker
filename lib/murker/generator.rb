@@ -43,7 +43,7 @@ module Murker
         'openapi' => OPEN_API_VERSION,
         'info' => OPEN_API_INFO,
         'paths' => {
-          change_path_params_from_colon_to_curly_braces(endpoint_path) => {
+          handle_params_in_path(endpoint_path) => {
             verb.downcase => verb_schema,
           },
         },
@@ -62,6 +62,10 @@ module Murker
       else
         { 'responses' => response_schema }
       end
+    end
+
+    def handle_params_in_path(path)
+      change_path_params_from_colon_to_curly_braces(path)
     end
 
     def change_path_params_from_colon_to_curly_braces(path)
