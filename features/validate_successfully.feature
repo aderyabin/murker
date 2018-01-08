@@ -43,16 +43,16 @@ Feature: validate interaction successfully given valid schema already exists
                       items:
                         type: object
                         required:
+                        - id
                         - name
                         - age
-                        - ololo
                         properties:
+                          id:
+                            type: integer
                           name:
                             type: string
                           age:
                             type: integer
-                          ololo:
-                            type: string
       """
 
   When I run `bin/rspec spec/requests/martians_spec.rb`

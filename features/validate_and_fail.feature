@@ -44,17 +44,17 @@ Feature: validate interaction and fails given schema already exists and does not
                       items:
                         type: object
                         required:
+                        - id
                         - name
                         - age
-                        - ololo
                         - thisIsGonnaFail
                         properties:
+                          id:
+                            type: integer
                           name:
                             type: string
                           age:
                             type: integer
-                          ololo:
-                            type: string
       """
 
     Given a file named "spec/murker/v1/martians/__id/GET.yml" with:
@@ -83,17 +83,17 @@ Feature: validate interaction and fails given schema already exists and does not
                     schema:
                       type: object
                       required:
+                      - id
                       - name
                       - age
-                      - ololo
                       - thisIsGonnaFailToo
                       properties:
+                        id:
+                          type: integer
                         name:
                           type: string
                         age:
                           type: integer
-                        ololo:
-                          type: string
       """
 
   When I run `bin/rspec spec/requests/martians_spec.rb`

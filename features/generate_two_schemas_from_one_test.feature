@@ -50,16 +50,16 @@ Feature: generate two schemas from one test with two interactions
                   items:
                     type: object
                     required:
+                    - id
                     - name
                     - age
-                    - ololo
                     properties:
+                      id:
+                        type: integer
                       name:
                         type: string
                       age:
                         type: integer
-                      ololo:
-                        type: string
   """
 
   Then a file named "spec/murker/v1/martians/__id/GET.yml" should exist
@@ -90,15 +90,14 @@ Feature: generate two schemas from one test with two interactions
                 schema:
                   type: object
                   required:
+                  - id
                   - name
                   - age
-                  - ololo
                   properties:
+                    id:
+                      type: integer
                     name:
                       type: string
                     age:
                       type: integer
-                    ololo:
-                      type: string
-
   """

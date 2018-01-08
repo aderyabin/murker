@@ -55,9 +55,15 @@ Feature: validate interaction successfully given valid schema already exists for
                     schema:
                       type: object
                       required:
+                      - id
+                      - martian_id
                       - name
                       - weight
                       properties:
+                        id:
+                          type: integer
+                        martian_id:
+                          type: integer
                         name:
                           type: string
                         weight:

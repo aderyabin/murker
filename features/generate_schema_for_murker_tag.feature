@@ -48,14 +48,14 @@ Feature: generate schema for test with :murker tag
                   items:
                     type: object
                     required:
+                    - id
                     - name
                     - age
-                    - ololo
                     properties:
+                      id:
+                        type: integer
                       name:
                         type: string
                       age:
                         type: integer
-                      ololo:
-                        type: string
   """

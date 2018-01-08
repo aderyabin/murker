@@ -15,7 +15,7 @@ Feature: fail on non-parsable json response
             martian = Martian.create! name: 'spajic', age: 30
 
             Murker.capture do
-              get '/v1/martians/1.html'
+              get '/v1/martians?respond_with_broken_json=1'
             end
 
             expect(response).to be_success

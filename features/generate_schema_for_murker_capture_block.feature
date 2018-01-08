@@ -51,14 +51,14 @@ Feature: generate schema for test with murker capture block
                   items:
                     type: object
                     required:
+                    - id
                     - name
                     - age
-                    - ololo
                     properties:
+                      id:
+                        type: integer
                       name:
                         type: string
                       age:
                         type: integer
-                      ololo:
-                        type: string
   """
