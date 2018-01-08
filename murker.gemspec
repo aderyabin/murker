@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'json-diff'
+  spec.add_dependency 'diffy'
   spec.add_dependency 'json-schema-generator'
 
   add_dev_dependencies(spec)

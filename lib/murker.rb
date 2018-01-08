@@ -37,7 +37,7 @@ module Murker
     validation_errors.each do |interaction, error|
       interaction_name = "#{interaction.verb} #{interaction.endpoint_path}"
       error_message <<
-        "Interaction '#{interaction_name}' failed with the following reason:\n" \
+        "Interaction '#{interaction_name}' failed! Schema changed:\n" \
         "#{error}\n\n"
     end
     error_message
