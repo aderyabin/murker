@@ -14,7 +14,6 @@ module Murker
       'version' => Murker::VERSION.to_s,
     }.freeze
     JSON_SCHEMA_VERSION = 'draft4'.freeze
-    JSON_SCHEMA_UNWANTED_FIELDS = %w[$schema description].freeze
     APPLICATION_JSON_CONTENT_TYPE = 'application/json'.freeze
 
     attr_reader :interaction
@@ -93,12 +92,6 @@ module Murker
           },
         },
       }
-    end
-
-    def remove_unexpected_fields(schema_object)
-      schema_object.tap do |schema|
-        JSON_SCHEMA_UNWANTED_FIELDS.each { |field| schema.delete field }
-      end
     end
   end
 end
