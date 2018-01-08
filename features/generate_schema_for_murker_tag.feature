@@ -14,7 +14,7 @@ Feature: generate schema for test with :murker tag
           it "returns a success response", :murker do
             martian = Martian.create! name: 'spajic', age: 30
 
-            get '/v1/martians.json'
+            get '/v1/martians'
             expect(response).to be_success
           end
         end

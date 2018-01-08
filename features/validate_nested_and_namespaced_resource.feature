@@ -12,10 +12,10 @@ Feature: validate interaction successfully given valid schema already exists for
 
         describe "GET pet" do
           it "returns a success response", :murker do
-            martian = Martian.create! name: 'spajic', age: 30, id: 1
-            martian.pets.create! name: 'chubby', weight: 10, id: 1
+            martian = Martian.create! name: 'spajic', age: 30
+            pet = martian.pets.create! name: 'chubby', weight: 10
 
-            get '/v1/martians/1/pets/1.json'
+            get "/v1/martians/#{martian.id}/pets/#{pet.id}"
 
             expect(response).to be_success
           end
