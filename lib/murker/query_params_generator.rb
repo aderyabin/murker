@@ -30,12 +30,11 @@ module Murker
         'description' => name,
         'schema' => schema_by_query_param_value(value),
         'required' => true,
-        'example' => value,
       }
     end
 
     # Value may be Array, Hash, or String
-    def schema_by_path_param_value(value)
+    def schema_by_query_param_value(value)
       case value.class
       when Array
         { 'type' => schema_by_object(value) }

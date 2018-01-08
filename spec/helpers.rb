@@ -7,7 +7,7 @@ module Helpers
     }
     response_and_params =
       if parameters
-        { 'responses' => response, 'parameters' => parameters }
+        { 'parameters' => parameters, 'responses' => response }
       else
         { 'responses' => response }
       end
@@ -88,6 +88,40 @@ module Helpers
           'type' => 'object', 'required' => %w[name age],
           'properties' => {
             'name' => { 'type' => 'string' }, 'age' => { 'type' => 'integer' }
+          }
+        },
+      ),
+    )
+  end
+
+  def expected_get_pet_with_query_params_schema
+    schema(
+      endpoint: '/martians/{martian_id}/pets/{id}',
+      verb: 'get',
+      parameters: [
+        {
+          'in' => 'path', 'name' => 'martian_id', 'description' => 'martian_id',
+          'schema' => { 'type' => 'integer' },
+          'required' => true, 'example' => '1'
+        },
+        {
+          'in' => 'query', 'name' => 'name', 'description' => 'name',
+          'schema' => { 'type' => 'string' },
+          'required' => true
+        },
+        {
+          'in' => 'query', 'name' => 'age', 'description' => 'age',
+          'schema' => { 'type' => 'string' },
+          'required' => true
+        },
+      ],
+      response: response_schema(
+        code: 200,
+        description: 'GET /martians/:martian_id/pets/:id -> 200',
+        content_schema: {
+          'type' => 'object', 'required' => %w[name weight],
+          'properties' => {
+            'name' => { 'type' => 'string' }, 'weight' => { 'type' => 'integer' }
           }
         },
       ),

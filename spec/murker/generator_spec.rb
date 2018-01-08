@@ -31,5 +31,19 @@ RSpec.describe Murker::Generator do
       end
       it { expect(generator.call).to eq expected_get_martian_schema }
     end
+
+    context 'when interaction is GET /martians/:martian_id/pets?name=true&age=true' do
+      let(:params) do
+        {
+          verb: 'GET',
+          endpoint_path: '/martians/:martian_id/pets/:id',
+          path_params: { 'controller' => 'v1/pets', 'action' => 'show', 'martian_id' => '1' },
+          query_params: { 'name' => 'true', 'age' => true },
+          status: 200,
+          body: { 'name' => 'chubby', 'weight' => 10 },
+        }
+      end
+      it { expect(generator.call).to eq expected_get_pet_with_query_params_schema }
+    end
   end
 end
