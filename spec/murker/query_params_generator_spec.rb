@@ -2,8 +2,8 @@ require 'spec_helper'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe Murker::QueryParamsGenerator do
-  # rubocop:enable Metrics/BlockLength
   describe '#call' do
+    # rubocop:enable Metrics/BlockLength
     let(:schema) { described_class.call(params) }
 
     context 'param is an Array from ?id[]=1&id[]=2&id[]=3' do

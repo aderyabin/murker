@@ -2,8 +2,8 @@ require 'spec_helper'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe Murker::Generator do
-  # rubocop:enable Metrics/BlockLength
   describe '#call' do
+    # rubocop:enable Metrics/BlockLength
     let(:generator) { described_class.new(interaction: interaction) }
     let(:interaction) { Murker::Interaction.new(params) }
 

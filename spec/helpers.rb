@@ -1,5 +1,7 @@
 # Helpers for specs
+# rubocop:disable Metrics/ModuleLength
 module Helpers
+  # rubocop:enable Metrics/ModuleLength
   def schema(endpoint:, verb:, response:, parameters: nil)
     schema = {
       'openapi' => '3.0.0',
@@ -98,23 +100,16 @@ module Helpers
     schema(
       endpoint: '/martians/{martian_id}/pets/{id}',
       verb: 'get',
-      parameters: [
-        {
-          'in' => 'path', 'name' => 'martian_id', 'description' => 'martian_id',
-          'schema' => { 'type' => 'integer' },
-          'required' => true, 'example' => '1'
-        },
-        {
-          'in' => 'query', 'name' => 'name', 'description' => 'name',
-          'schema' => { 'type' => 'string' },
-          'required' => true
-        },
-        {
-          'in' => 'query', 'name' => 'age', 'description' => 'age',
-          'schema' => { 'type' => 'string' },
-          'required' => true
-        },
-      ],
+      parameters: [{
+        'in' => 'path', 'name' => 'martian_id', 'description' => 'martian_id',
+        'schema' => { 'type' => 'integer' }, 'required' => true, 'example' => '1'
+      }, {
+        'in' => 'query', 'name' => 'name', 'description' => 'name',
+        'schema' => { 'type' => 'string' }, 'required' => true
+      }, {
+        'in' => 'query', 'name' => 'age', 'description' => 'age',
+        'schema' => { 'type' => 'string' }, 'required' => true
+      }],
       response: response_schema(
         code: 200,
         description: 'GET /martians/:martian_id/pets/:id -> 200',
