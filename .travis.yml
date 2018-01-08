@@ -5,7 +5,8 @@ rvm:
 gemfile:
   - gemfiles/rails_5.gemfile
 before_install:
-  - gem install bundler -v 1.16.0
+  - gem install bundler -v 1.16.1
 script:
-  - RAILS_ENV=test rspec
+  - RAILS_ENV=test bunele exec rake spec
   - RAILS_ENV=test bundle exec appraisal rails-5 cucumber
+cache: bundler
