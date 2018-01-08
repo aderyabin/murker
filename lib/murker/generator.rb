@@ -1,4 +1,5 @@
 require 'json-schema-generator'
+require 'murker/path_params_generator'
 
 module Murker
   # Generates OpenAPI v3 schema for Interaction
@@ -16,7 +17,16 @@ module Murker
     attr_reader :interaction
 
     extend Forwardable
-    delegate %i[verb endpoint_path path_info path_params body status] => :interaction
+    delegate %i[
+      verb
+      endpoint_path
+      path_info
+      path_params
+      query_params
+      payload
+      body
+      status
+    ] => :interaction
 
     def initialize(interaction:)
       @interaction = interaction
@@ -57,16 +67,23 @@ module Murker
     end
 
     def parameters_schema
-      return if path_params.nil? || path_params.empty?
-      params = path_params.reject { |k, _v| %w[controller action].include? k }
-      return if params.empty?
+      schema = (Array(path_params_schema) + Array(query_params_schema)).compact
+      schema.empty? ? nil : schema
+    end
 
-      params.map do |name, value|
+    def path_params_schema
+      PathParamsGenerator.call(path_params)
+    end
+
+    def query_params_schema
+      return nil unless query_params
+
+      query_params.map do |name, value|
         {
-          'in' => 'path',
+          'in' => 'query',
           'name' => name,
           'description' => name,
-          'schema' => schema_by_path_param_value(value),
+          'schema' => schema_by_query_param_value(value),
           'required' => true,
           'example' => value,
         }
@@ -86,12 +103,10 @@ module Murker
       }
     end
 
-    def schema_by_path_param_value(value)
-      if a_positive_ingeger?(value)
-        { 'type' => 'integer' }
-      else
-        { 'type' => 'string' }
-      end
+    def schema_by_query_param_value(value)
+      # simple value - string
+      # array
+      # hash
     end
 
     def schema_by_object(obj)
@@ -108,10 +123,6 @@ module Murker
       schema_object.tap do |schema|
         JSON_SCHEMA_UNWANTED_FIELDS.each { |field| schema.delete field }
       end
-    end
-
-    def a_positive_ingeger?(str)
-      /\A\d+\z/.match(str)
     end
   end
 end
