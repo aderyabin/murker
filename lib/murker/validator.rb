@@ -1,4 +1,4 @@
-require 'json-diff'
+require 'murker/error_formatter'
 
 module Murker
   # Validates new_schema vs stored_schema and returns validation error
@@ -12,11 +12,7 @@ module Murker
 
       return if prepared_new_schema == prepared_stored_schema
 
-      JsonDiff.diff(
-        prepared_stored_schema,
-        prepared_new_schema,
-        include_was: true,
-      )
+      ErrorFormatter.call(prepared_new_schema, prepared_stored_schema)
     end
 
     def self.remove_unnecessary_fields(schema)
