@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/spajic/murker.git
-  revision: 1908ecd1220827d67ddc10877e636972a03457a1
-  branch: mvp2
+  revision: 505e74787fce6f6d73492bdabd78f4b5724c72bb
+  branch: master
   specs:
     murker (0.1.0)
       json-diff
