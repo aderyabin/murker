@@ -10,22 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180101161346) do
+ActiveRecord::Schema.define(version: 20180107194526) do
 
   create_table "martians", force: :cascade do |t|
     t.string "name"
     t.integer "age"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "pets", force: :cascade do |t|
     t.integer "martian_id"
     t.string "name"
     t.integer "weight"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["martian_id"], name: "index_pets_on_martian_id"
   end
 
 end

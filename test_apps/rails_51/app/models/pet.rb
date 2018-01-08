@@ -1,3 +1,3 @@
-class Pet < ApplicationRecord
+class Pet < ActiveRecord::Base
   belongs_to :martian
 end
