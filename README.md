@@ -115,18 +115,16 @@ require 'murker/spec_helper' # in your specs
 ```
 
 ## Features
-- Cucumber tests via prepared rails 5.1 test-app
+- TravisCI integration
+- Rspec tests and Cucumber tests via prepared rails 5.1 test-app
 - Generation of valid OAS3 schema
 - Support to capture multiple interactions per block
 - Support tag (`:murker`) and block (`Murker.capture {}`) syntax
 - Diff of schemas via `json-diff` gem [https://github.com/espadrine/json-diff]
 
 ## TODO
-- Simplify test-app
-- Gitignore staff that may vary
-- Support different versions of rails and ruby
+- Support and test different versions of rails and ruby
 - Support minitest
-- Generate schema for query-params
 - Automatically validate generated schemas against OAS3 spec
 - Handle compatible and incompatible changes of schema differently
 - Allow non-necessary attributes to vary (require only necessary attributes to be equal)
