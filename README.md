@@ -145,7 +145,7 @@ require 'murker/spec_helper' # in your specs
 - Generation of valid OAS3 schema
 - Support to capture multiple interactions per block
 - Support tag (`:murker`) and block (`Murker.capture {}`) syntax
-- Diff of schemas via `json-diff` gem [https://github.com/espadrine/json-diff]
+- Diff of schemas via `diffy` gem [https://github.com/samg/diffy]
 
 ## TODO
 - Support and test different versions of rails and ruby
