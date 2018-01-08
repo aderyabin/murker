@@ -1,6 +1,7 @@
 require 'murker'
 
 module Murker
+  # Interaction represents request-response interaction
   class Interaction
     class NonroutableRequest < RuntimeError; end
 
@@ -14,7 +15,7 @@ module Murker
       :query_params,
       :payload,
       :status,
-      :body
+      :body,
     )
 
     def initialize(**params)
@@ -30,10 +31,14 @@ module Murker
     end
 
     def self.from_action_dispatch(request, response)
-      json_body = JSON.parse(response.body) rescue nil
+      json_body = begin
+                    JSON.parse(response.body)
+                  rescue StandardError
+                    nil
+                  end
       unless json_body
-        error_message = "Murker requires response.body to be parsable JSON, " <<
-          "but got '#{response.body}'"
+        error_message = 'Murker requires response.body to be parsable JSON, ' \
+                        "but got '#{response.body}'"
         raise MurkerError, error_message
       end
 
@@ -44,16 +49,14 @@ module Murker
         path_params: request.env["#{PREFIX}.path_parameters"].stringify_keys.except('format'),
         query_params: request.env["#{PREFIX}.query_parameters"],
         payload: request.env["#{PREFIX}.request_parameters"].merge(
-          request.env["#{PREFIX}.query_parameters"]
+          request.env["#{PREFIX}.query_parameters"],
         ).stringify_keys.except('action', 'controller', 'format', '_method'),
         status: response.status,
-        body: json_body
+        body: json_body,
       }
 
       new(params)
     end
-
-    private
 
     def self.route_name(request)
       return unless defined? Rails

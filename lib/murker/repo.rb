@@ -17,7 +17,7 @@ module Murker
       deserialize_schema File.read(path_for(interaction))
     end
 
-    def self.has_schema_for?(interaction)
+    def self.schema_for?(interaction)
       File.exist? path_for(interaction)
     end
 

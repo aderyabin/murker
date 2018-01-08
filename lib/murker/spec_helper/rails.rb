@@ -1,6 +1,7 @@
 require 'active_support/concern'
 require 'murker/spy'
 
+# rubocop:disable Style/Documentation
 module Murker
   module SpecHelper
     module Rails
@@ -11,7 +12,8 @@ module Murker
           def process(*)
             super.tap do
               if Murker::Spy.enabled?
-                Murker::Spy.current
+                Murker::Spy
+                  .current
                   .add_interaction_by_action_dispatch(@request, @response)
               end
             end
@@ -25,6 +27,7 @@ module Murker
     end
   end
 end
+# rubocop:enable Style/Documentation
 
 if defined?(ActionDispatch::Integration::Session)
   ActionDispatch::Integration::Session.send :include, Murker::SpecHelper::Rails

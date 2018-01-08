@@ -1,18 +1,18 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.4'
 gem 'sqlite3'
-gem 'puma', '~> 3.7'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.7'
   gem 'murker', path: '/Users/spajic/spajic/murker'
   gem 'pry-byebug'
+  gem 'rspec-rails', '~> 3.7'
 end
 
 group :development do

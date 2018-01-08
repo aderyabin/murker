@@ -1,6 +1,7 @@
 require 'murker/interaction'
 
 module Murker
+  # Spy intercepts and collects Interactions from spied block
   class Spy
     attr_reader :interactions
 

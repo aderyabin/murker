@@ -5,6 +5,7 @@ require 'murker/generator'
 require 'murker/validator'
 require 'murker/repo'
 
+# Main module
 module Murker
   class MurkerError < StandardError; end
   class ValidationError < MurkerError; end
@@ -16,7 +17,7 @@ module Murker
   def self.handle_captured_interactions(interactions)
     validation_errors =
       interactions.each_with_object([]) do |interaction, errors|
-        if Repo.has_schema_for?(interaction)
+        if Repo.schema_for?(interaction)
           stored_schema = Repo.retreive_schema_for(interaction)
           new_schema = Generator.call(interaction: interaction)
           validation_error =
@@ -36,7 +37,7 @@ module Murker
     validation_errors.each do |interaction, error|
       interaction_name = "#{interaction.verb} #{interaction.endpoint_path}"
       error_message <<
-        "Interaction '#{interaction_name}' failed with the following reason:\n" <<
+        "Interaction '#{interaction_name}' failed with the following reason:\n" \
         "#{error}\n\n"
     end
     error_message
