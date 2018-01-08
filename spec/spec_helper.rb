@@ -1,4 +1,5 @@
 require 'bundler/setup'
+require 'helpers'
 require 'murker'
 
 RSpec.configure do |config|

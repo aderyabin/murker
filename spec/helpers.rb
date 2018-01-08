@@ -21,7 +21,7 @@ module Helpers
     {
       "'#{code}'" => {
         'description' => description,
-        'content' => { 'application/json' => content_schema },
+        'content' => { 'application/json' => { 'schema' => content_schema } },
       },
     }
   end
@@ -62,7 +62,7 @@ module Helpers
           'uniqueItems' => true,
           'items' => {
             'type' => 'object',
-            'required' => %w[age name], # was [name age]
+            'required' => %w[name age],
             'properties' => { # was name, age
               'age' => { 'type' => 'integer' }, 'name' => { 'type' => 'string' }
             },

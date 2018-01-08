@@ -2,6 +2,16 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'murker/version'
 
+def add_dev_dependencies(spec)
+  spec.add_development_dependency 'appraisal'
+  spec.add_development_dependency 'aruba', '~> 0.6.2'
+  spec.add_development_dependency 'bundler', '~> 1.16'
+  spec.add_development_dependency 'cucumber'
+  spec.add_development_dependency 'pry-byebug'
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rspec', '~> 3.0'
+end
+
 Gem::Specification.new do |spec|
   spec.name          = 'murker'
   spec.version       = Murker::VERSION
@@ -33,14 +43,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'json-schema-generator'
 
   add_dev_dependencies(spec)
-end
-
-def add_dev_dependencies(spec)
-  spec.add_development_dependency 'appraisal'
-  spec.add_development_dependency 'aruba', '~> 0.6.2'
-  spec.add_development_dependency 'bundler', '~> 1.16'
-  spec.add_development_dependency 'cucumber'
-  spec.add_development_dependency 'pry-byebug'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
 end
