@@ -1,5 +1,7 @@
 # Murker
 
+[![Build Status](https://travis-ci.org/spajic/murker.svg?branch=master)](https://travis-ci.org/spajic/murker)
+
 Murker detects changes in schemas of Rails API-interactions in json-format.
 
 To use murker, tag spec having API-interaction with `:murker` tag.
