@@ -5,16 +5,11 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.4'
 gem 'sqlite3'
 
-group :development, :test do
+group :test do
   gem 'murker', github: 'spajic/murker', branch: 'master'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.7'
-end
-
-group :development do
-  gem 'listen', '>= 3.0.5', '< 3.2'
 end

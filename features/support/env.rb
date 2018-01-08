@@ -1,7 +1,5 @@
 ARUBA_TIMEOUT_IN_SECONDS = 10
 
-require 'pry'
-
 def example_path
   rails_version = ENV['BUNDLE_GEMFILE'].to_s.match(/rails_\d/).to_s
   raise 'Use `appraisal rails-5 cucumber ...`' unless rails_version == 'rails_5'

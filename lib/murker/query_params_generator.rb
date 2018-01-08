@@ -1,5 +1,4 @@
 require 'murker/utils'
-require 'pry'
 module Murker
   # Generates OpenAPI v3 schema for query_params of Interaction
   class QueryParamsGenerator
