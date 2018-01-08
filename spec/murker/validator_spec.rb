@@ -52,5 +52,16 @@ RSpec.describe Murker::Validator do
         ).to be nil
       }
     end
+
+    context 'when schemas differ in unnecessary fields: description, example' do
+      it {
+        expect(
+          validator.call(
+            new_schema: martian_schema_with_changed_description_and_example,
+            stored_schema: expected_get_martian_schema,
+          ),
+        ).to be nil
+      }
+    end
   end
 end

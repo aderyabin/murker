@@ -96,6 +96,28 @@ module Helpers
     )
   end
 
+  def martian_schema_with_changed_description_and_example
+    schema(
+      endpoint: '/martians/{id}',
+      verb: 'get',
+      parameters: [{
+        'in' => 'path', 'name' => 'id', 'description' => 'id',
+        'schema' => { 'type' => 'integer' },
+        'required' => true, 'example' => '9999999'
+      }],
+      response: response_schema(
+        code: 200,
+        description: 'I HAVE CHANGED DESCRIPTION',
+        content_schema: {
+          'type' => 'object', 'required' => %w[name age],
+          'properties' => {
+            'name' => { 'type' => 'string' }, 'age' => { 'type' => 'integer' }
+          }
+        },
+      ),
+    )
+  end
+
   def expected_get_pet_with_query_params_schema
     schema(
       endpoint: '/martians/{martian_id}/pets/{id}',
