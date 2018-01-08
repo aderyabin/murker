@@ -1,5 +1,3 @@
-require 'json-schema-generator'
-
 module Murker
   # Generates OpenAPI v3 schema for path_params of Interaction
   class PathParamsGenerator
