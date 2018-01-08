@@ -10,7 +10,7 @@ gem 'rails', '~> 5.1.4'
 gem 'sqlite3'
 
 group :development, :test do
-  gem 'murker', path: '/Users/spajic/spajic/murker'
+  gem 'murker', github: 'spajic/murker', branch: 'mvp2'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.7'
 end

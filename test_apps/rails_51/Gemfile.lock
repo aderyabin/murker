@@ -1,5 +1,7 @@
-PATH
-  remote: /Users/spajic/spajic/murker
+GIT
+  remote: https://github.com/spajic/murker.git
+  revision: 1908ecd1220827d67ddc10877e636972a03457a1
+  branch: mvp2
   specs:
     murker (0.1.0)
       json-diff
