@@ -1,10 +1,12 @@
 sudo: false
 language: ruby
 rvm:
-  - 2.4.3
+  - 2.3.2
 gemfile:
   - gemfiles/rails_5.gemfile
-before_install: gem install bundler -v 1.16.0
+before_install:
+  - gem install bundler -v 1.16.0
+  - bundle exec appraisal install
 script:
   - rspec
   - RAILS_ENV=test bundle exec appraisal rails-5 cucumber
