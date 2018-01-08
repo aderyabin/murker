@@ -15,4 +15,4 @@
 /test_apps/rails_51/log/
 /test_apps/rails_51/db/development.sqlite3
 /test_apps/rails_51/db/test.sqlite3
-/test_apps/rails_51/spec/
+/test_apps/rails_51/spec/*
