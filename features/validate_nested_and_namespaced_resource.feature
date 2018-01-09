@@ -13,7 +13,7 @@ Feature: validate interaction successfully given valid schema already exists for
         describe "GET pet" do
           it "returns a success response", :murker do
             martian = Martian.create! name: 'spajic', age: 30
-            pet = martian.pets.create! name: 'chubby', weight: 10
+            pet = Pet.create! name: 'chubby', weight: 10, martian_id: martian.id
 
             get "/v1/martians/#{martian.id}/pets/#{pet.id}"
 
