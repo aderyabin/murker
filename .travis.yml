@@ -1,10 +1,15 @@
 sudo: false
 language: ruby
+env:
+  - RAILS_ENV=test
 rvm:
   - 2.3.2
+gemfile:
+  - gemfiles/rails_5.gemfile
 before_install:
   - gem install bundler -v 1.16.1
 script:
-  - RAILS_ENV=test bundle exec rake spec
-  - bundle exec appraisal install && RAILS_ENV=test bundle exec appraisal rails-5 cucumber
+  - bundle exec rubocop
+  - bundle exec rake spec
+  - bundle exec appraisal rails-5 cucumber
 cache: bundler

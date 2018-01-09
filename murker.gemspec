@@ -10,6 +10,7 @@ def add_dev_dependencies(spec)
   spec.add_development_dependency 'pry-byebug'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'rubocop', '~> 0.52.1'
 end
 
 Gem::Specification.new do |spec|

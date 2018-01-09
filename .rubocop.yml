@@ -7,7 +7,10 @@ AllCops:
     - 'config/**/*'
     - 'db/**/*'
     - 'Gemfile'
-    - 'test_apps/**/**'
+    - 'test_apps/**/*'
+    - 'vendor/bundle/**/*'
+    - 'vendor/bundle/ruby/2.3.0/gems/backports-3.11.0/.irbrc'
+    - 'gemfiles/**/*'
 
 Metrics/MethodLength:
   Max: 25
