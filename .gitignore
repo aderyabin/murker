@@ -9,3 +9,12 @@
 
 # rspec failure tracking
 .rspec_status
+
+# test app
+/test_apps/rails_51/tmp/
+/test_apps/rails_51/log/
+/test_apps/rails_51/db/development.sqlite3
+/test_apps/rails_51/db/test.sqlite3
+/test_apps/rails_51/spec/requests/*
+/test_apps/rails_51/spec/murker/*
+
