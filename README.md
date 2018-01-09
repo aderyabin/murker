@@ -168,7 +168,7 @@ To run cucumber specs:
 ```bash
 bundle exec appraisal install
 bundle exec appraisal rails-5 cucumber
-rm -r spec/murker && bundle exec appraisal reils-5 cucumber
+rm -r spec/murker && bundle exec appraisal rails-5 cucumber
 ```
 
 To run rspec specs:
