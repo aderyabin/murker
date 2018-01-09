@@ -12,7 +12,7 @@ Feature: generate two schemas from one test with two interactions
 
         describe "GET #index and martian" do
           it "returns a success response", :murker do
-            martian = Martian.create! name: 'spajic', age: 30
+            martian = Martian.create! name: 'spajic', age: 30, id: 1
 
             get '/v1/martians'
             get "/v1/martians/#{martian.id}"

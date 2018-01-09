@@ -5,7 +5,7 @@ class Martian
   attr_reader :id, :name, :age
 
   def self.create!(id: nil, name:, age:)
-    new(name: name, age: age).tap { |martian| @@martians << martian }
+    new(id: id, name: name, age: age).tap { |martian| @@martians << martian }
   end
 
   def self.all
