@@ -1,0 +1,37 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  Exclude:
+    - 'bin/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'Gemfile'
+    - 'test_apps/**/*'
+    - 'vendor/bundle/**/*'
+    - 'vendor/bundle/ruby/2.3.0/gems/backports-3.11.0/.irbrc'
+    - 'gemfiles/**/*'
+
+Metrics/MethodLength:
+  Max: 25
+
+Metrics/LineLength:
+  Max: 100
+
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Layout/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/MultilineMethodCallBraceLayout:
+  EnforcedStyle: new_line
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
